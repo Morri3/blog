@@ -46,3 +46,15 @@
   url("/public/font/DingTalk_JinBuTi_Regular.woff") format("woff");
   font-display: swap;
 }
+// 阿里妈妈灵动体
+@font-face {
+  font-family: "Alimama_Agile";font-weight: 700;src: url("/public/font/Alimama_Agile.woff2") format("woff2"),
+  url("/public/font/Alimama_Agile.woff") format("woff");
+  font-display: swap;
+}
+// 阿里妈妈刀隶体
+@font-face {
+  font-family: "Daoliti";font-weight: 400;src: url("/public/font/Daoliti.woff2") format("woff2"),
+  url("/public/font/Daoliti.woff") format("woff");
+  font-display: swap;
+}
