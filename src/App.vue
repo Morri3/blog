@@ -1,17 +1,33 @@
 <template>
   <div>
-    <div class="outer_box">
+    <div class="outer_box" id="page1">
       <!--顶部状态栏-->
       <div class="container1">
         <div class="nav1">BLOG</div>
         <img class="icon" src="@/assets/home/icon.gif" alt=""/>
-        <div class="nav2">About Me</div>
+        <div class="nav2">Portfolio</div>
       </div>
 
       <!--区块1-->
       <div class="container2">
         <div class="title">Become yourself,</div>
         <div class="title">Do your BEST!</div>
+      </div>
+
+      <!--下一页-->
+      <div class="next1" @click="next1">
+        <button class="button" data-text="Awesome">
+          <span class="actual-text">&nbsp;next&nbsp;</span>
+          <span class="hover-text" aria-hidden="true">&nbsp;next&nbsp;</span>
+        </button>
+      </div>
+
+      <!--上一页-->
+      <div class="pre1" @click="pre1" id="page2">
+        <button class="button" data-text="Awesome">
+          <span class="actual-text">&nbsp;previous&nbsp;</span>
+          <span class="hover-text" aria-hidden="true">&nbsp;previous&nbsp;</span>
+        </button>
       </div>
 
       <!--区块2-->
@@ -57,6 +73,22 @@
             <p class="text">Focusing on front-end development.</p>
           </div>
         </div>
+      </div>
+
+      <!--下一页-->
+      <div class="next2" @click="next2">
+        <button class="button" data-text="Awesome">
+          <span class="actual-text">&nbsp;next&nbsp;</span>
+          <span class="hover-text" aria-hidden="true">&nbsp;next&nbsp;</span>
+        </button>
+      </div>
+
+      <!--上一页-->
+      <div class="pre2" @click="pre2" id="page3">
+        <button class="button" data-text="Awesome">
+          <span class="actual-text">&nbsp;previous&nbsp;</span>
+          <span class="hover-text" aria-hidden="true">&nbsp;previous&nbsp;</span>
+        </button>
       </div>
 
       <!--区块4-->
@@ -138,8 +170,32 @@ export default {
     onMounted(() => {
     })
 
+    // 往前跳到首页
+    const pre1 = () => {
+      document.getElementById('page1').scrollIntoView({ behavior: 'smooth' }) // 缓慢滑动
+    }
+
+    // 往前跳到第二页
+    const pre2 = () => {
+      document.getElementById('page2').scrollIntoView({ behavior: 'smooth' }) // 缓慢滑动
+    }
+
+    // 往后跳到第二页
+    const next1 = () => {
+      document.getElementById('page2').scrollIntoView({ behavior: 'smooth' }) // 缓慢滑动
+    }
+
+    // 往后跳到第三页
+    const next2 = () => {
+      document.getElementById('page3').scrollIntoView({ behavior: 'smooth' }) // 缓慢滑动
+    }
+
     return {
-      ...toRefs(state)
+      ...toRefs(state),
+      pre1,
+      pre2,
+      next1,
+      next2
     }
   }
 }
@@ -294,12 +350,94 @@ export default {
     }
   }
 
-  //容器2、容器4
+  //下一页的margin
+  .next1{
+    margin-top: 70px;
+  }
+
+  //上一页的margin
+  .pre1{
+    margin-top: 130px;
+  }
+
+  //下一页的margin
+  .next2{
+    margin-top: 20px;
+  }
+
+  //上一页的margin
+  .pre2{
+    margin-top: 130px;
+  }
+
+  //上/下一页通用
+  .next1, .pre1, .next2, .pre2{
+    width: 100%;
+    height: auto;
+
+    //对齐
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    //移除按钮默认样式
+    .button {
+      height: auto;
+
+      margin: 0;
+      padding: 0;
+
+      background: transparent; //透明背景
+      border: none;
+
+      //指针
+      cursor: pointer;
+    }
+
+    //按钮
+    .button {
+      letter-spacing: 4px; //字间距
+      font-size: 32px;
+      font-family: Arial;
+      text-decoration: none; //文字无装饰
+      text-transform: uppercase; //大写
+
+      position: relative; //相对定位
+      color: transparent; //透明
+      -webkit-text-stroke: 1px rgba(255,255,255,0.6);
+    }
+
+    //悬停时文字样式
+    .hover-text {
+      width: 0%;
+
+      content: attr(data-text); //动态内容
+
+      position: absolute; //绝对定位
+      box-sizing: border-box; //IE盒子模型
+      overflow: hidden; //溢出隐藏
+
+      color: #37FF8B;
+      -webkit-text-stroke: 1px #37FF8B; //文字描边
+      inset: 0; //等价于top:0; left:0; bottom:0; right:0;
+      border-right: 6px solid #37FF8B;
+      transition: 0.5s; //动画
+    }
+
+    //悬停时
+    .button:hover .hover-text {
+      width: 100%;
+      filter: drop-shadow(0 0 23px #37FF8B); //设置图片阴影
+    }
+  }
+
+  //容器3、容器5
   .container3, .container5{
     width: 80%; //宽度设为整个屏幕宽度的80%，留出左右两边的间隙
     height: 150px;
 
-    margin-top: 80px;
+    margin-top: 20px;
     border-radius: 20px;
 
     //对齐
@@ -341,7 +479,7 @@ export default {
     }
   }
 
-  //容器2
+  //容器3
   .container3{
     //背景图片
     background-image: url('@/assets/home/bg2.svg');
@@ -349,7 +487,7 @@ export default {
     background-position-x: right; //右对齐
   }
 
-  //容器4
+  //容器5
   .container5{
     //背景图片
     background-image: url('@/assets/home/bg4.svg');
@@ -357,12 +495,12 @@ export default {
     background-position-x: right; //右对齐
   }
 
-  //容器3
+  //容器4
   .container4{
     width: 80%; //宽度设为整个屏幕宽度的80%，留出左右两边的间隙
     height: 400px;
 
-    margin-top: 80px;
+    margin-top: 40px;
     border-radius: 20px;
 
     //对齐
@@ -541,12 +679,12 @@ export default {
     }
   }
 
-  //容器5
+  //容器6
   .container6{
     width: 80%; //宽度设为整个屏幕宽度的80%，留出左右两边的间隙
     height: 400px;
 
-    margin-top: 80px;
+    margin-top: 40px;
     border-radius: 20px;
 
     //对齐
@@ -767,10 +905,10 @@ export default {
     }
   }
 
-  //容器6
+  //容器7
   .container7{
     width: 25%;
-    height: 50px;
+    height: 40px;
 
     //对齐
     display: flex;
@@ -778,8 +916,8 @@ export default {
     justify-content: center;
     align-items: center;
 
-    margin-top: 60px;
-    margin-bottom: 40px;
+    margin-top: 20px;
+    margin-bottom: 15px;
     border-radius: 15px;
 
     //阴影
