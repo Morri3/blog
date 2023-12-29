@@ -168,6 +168,11 @@ export default {
     })
 
     onMounted(() => {
+      // 禁止页面滑动
+      document.body.style.overflow = 'hidden'
+      document.addEventListener('touchmove', (e) => {
+        e.preventDefault()
+      }, { passive: false })
     })
 
     // 往前跳到首页
